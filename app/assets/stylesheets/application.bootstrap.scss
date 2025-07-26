@@ -1,0 +1,26 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+// Animaciones para actualizaciones de precio en tiempo real
+.price-updated {
+  animation: priceUpdate 2s ease-in-out;
+}
+
+@keyframes priceUpdate {
+  0% { 
+    background-color: #fff3cd; 
+    transform: scale(1);
+  }
+  25% { 
+    background-color: #d4edda; 
+    transform: scale(1.1);
+  }
+  50% { 
+    background-color: #d1ecf1; 
+    transform: scale(1.05);
+  }
+  100% { 
+    background-color: transparent; 
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "cars_results" do %>
+<div class="d-flex justify-content-center align-items-start gap-4" style="max-width: 900px; margin: auto;">
+
+  <div style="flex: 1; max-width: 450px;">
+    <% if @car.image.attached? %>
+      <%= image_tag @car.image, alt: @car.model, class: "img-fluid rounded", style: "height: 350px; object-fit: cover; width: 100%; border-radius: 15px;" %>
+    <% else %>
+      <img src="https://via.placeholder.com/400x350?text=No+Image" alt="No Image" class="img-fluid rounded" />
+    <% end %>
+  </div>
+
+  <div style="flex: 1; max-width: 350px;">
+    <div class="card p-4 shadow rounded">
+      <h2 class="mb-3"><%= @car.brand_name %> <%= @car.model %></h2>
+      <p class="fs-5"><strong>Año:</strong> <%= @car.year %></p>
+      <p class="fs-5"><strong>Color:</strong> <%= @car.color %></p>
+      <p class="fs-5"><strong>Transmisión:</strong> <%= @car.transmission.humanize %></p>
+      <p class="fs-5"><strong>Condición:</strong> <%= @car.condition.humanize %></p>
+      <p class="fs-5"><strong>Kilómetros:</strong> <%= number_with_delimiter(@car.mileage) %></p>
+      <p class="fs-5"><strong>Precio:</strong> $<%= number_with_delimiter(@car.price) %></p>
+      <%= link_to 'Volver', cars_path, data: { turbo_frame: "cars" }, class: "btn btn-primary mt-4 btn-lg" %>
+    </div>
+  </div>
+</div>
+<% end %>

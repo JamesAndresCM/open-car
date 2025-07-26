@@ -1,0 +1,36 @@
+<div id="flash_messages">
+<% flash.each do |type, message| %>
+  <% next if message.blank? %>
+  
+  <% 
+    # Mapear los tipos de flash de Rails a clases de Bootstrap
+    alert_class = case type.to_s
+                 when 'notice', 'success'
+                   'alert-success'
+                 when 'alert', 'error'
+                   'alert-danger'
+                 when 'warning'
+                   'alert-warning'
+                 when 'info'
+                   'alert-info'
+                 else
+                   'alert-primary'
+                 end
+  %>
+  
+  <div class="alert <%= alert_class %> alert-dismissible fade show mb-3" 
+       role="alert"
+       data-controller="flash-message"
+       data-flash-message-delay-value="5000">
+    
+    <%= message %>
+    
+    <button type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Cerrar"
+            data-action="click->flash-message#dismiss">
+    </button>
+  </div>
+<% end %>
+</div>

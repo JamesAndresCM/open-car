@@ -1,0 +1,31 @@
+<% content_for :title, "Todos los Autos" %>
+
+<!-- Suscripción a actualizaciones en tiempo real -->
+<%= turbo_stream_from "cars_channel" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Todos los Autos</h1>
+</div>
+
+<!-- Lista de autos -->
+<%= turbo_frame_tag "cars_results" do %>
+  <% if @cars.any? %>
+    <div class="row">
+      <%= render @cars %>
+    </div>
+    
+    <!-- Paginación -->
+    <% if @pagy.pages > 1 %>
+      <nav aria-label="Paginación de autos">
+        <%== pagy_bootstrap_nav(@pagy) if defined?(@pagy) %>
+      </nav>
+    <% end %>
+  <% else %>
+    <div class="text-center py-5">
+      <i class="fas fa-car fa-3x text-muted mb-3"></i>
+      <h4 class="text-muted">No se encontraron autos</h4>
+      <p class="text-muted">Intenta ajustar los filtros de búsqueda</p>
+    </div>
+  <% end %>
+<% end %>
+

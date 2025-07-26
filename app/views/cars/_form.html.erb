@@ -1,0 +1,104 @@
+<turbo-frame id="car_form">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-12">
+      <div class="border rounded p-4 bg-light shadow-sm">
+        <%= form_with(model: car, local: true) do |form| %>
+          <% if car.errors.any? %>
+            <div class="alert alert-danger">
+              <h4><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h4>
+              <ul>
+                <% car.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="row mb-3">
+            <div class="col-6">
+              <%= form.label :model, class: "form-label" %>
+              <%= form.text_field :model, class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <%= form.label :price, class: "form-label" %>
+              <%= form.number_field :price, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <%= form.label :year, class: "form-label" %>
+              <%= form.number_field :year, class: "form-control" %>
+            </div>
+            <div class="col-4">
+              <%= form.label :mileage, class: "form-label" %>
+              <%= form.number_field :mileage, class: "form-control" %>
+            </div>
+            <div class="col-4">
+              <%= form.label :color, class: "form-label" %>
+              <%= form.text_field :color, type: "color", class: "form-control form-control-color", value: car.color || "#563d7c", title: "Choose your color" %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <%= form.label :transmission, class: "form-label" %>
+              <%= form.select :transmission, Car.transmissions.keys.map { |t| [t.titleize, t] }, {}, class: "form-select" %>
+            </div>
+            <div class="col-4">
+              <%= form.label :condition, class: "form-label" %>
+              <%= form.select :condition, Car.conditions.keys.map { |c| [c.titleize, c] }, {}, class: "form-select" %>
+            </div>
+            <div class="col-4">
+              <%= form.label :brand_id, "Brand", class: "form-label" %>
+              <%= form.collection_select :brand_id, brands, :id, :name, { prompt: "Select brand" }, class: "form-select" %>
+            </div>
+          </div>
+
+          <div data-controller="image-preview">
+            <div class="mb-3">
+              <%= form.label :image, "Subir imagen", class: "form-label" %>
+              <%= form.file_field :image,
+                  class: "form-control",
+                  data: {
+                    image_preview_target: "input",
+                    action: "image-preview#previewImage"
+                  } %>
+            </div>
+
+            <div class="mb-3">
+              <% if car.image.attached? %>
+                <%= image_tag car.image.variant(resize_to_limit: [300, 150]),
+                    class: "img-thumbnail",
+                    data: {
+                      image_preview_target: "preview"
+                    },
+                    width: 300, height: 150 %>
+              <% else %>
+                <img data-image-preview-target="preview"
+                    class="img-thumbnail d-none"
+                    width="300" height="150" />
+              <% end %>
+            </div>
+
+            <div class="mb-3">
+              <button type="button"
+                      class="btn btn-outline-secondary btn-sm d-none"
+                      data-action="image-preview#cancelPreview"
+                      data-image-preview-target="cancelButton">
+                Cancelar imagen nueva
+              </button>
+            </div>
+          </div>
+
+
+
+          <div class="mb-3 text-center">
+            <%= form.submit "Save", class: "btn btn-primary btn-sm px-4" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>
+

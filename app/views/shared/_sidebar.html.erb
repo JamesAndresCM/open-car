@@ -1,0 +1,156 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="card-title mb-0">Filtrar autos</h5>
+      <small class="text-muted" id="results_count">
+        <%= render "shared/results_count", count: @total_count || 0 %>
+      </small>
+    </div>
+
+    <%= form_with model: @car_filter || CarFilter.new, 
+                  url: cars_path, 
+                  method: :get,
+                  scope: :car_filter,
+                  local: false,
+                  data: { 
+                    controller: "car-filter",
+                    car_filter_target: "form"
+                  } do |form| %>
+      
+      <!-- Búsqueda general -->
+      <div class="mb-2">
+        <%= form.label :search, "Modelo o marca", class: "form-label" %>
+        <%= form.text_field :search, 
+                           class: "form-control", 
+                           placeholder: "Ej: Toyota Corolla",
+                           data: { 
+                             car_filter_target: "searchInput",
+                             action: "input->car-filter#delayedFilter"
+                           } %>
+      </div>
+
+      <!-- Marca -->
+      <div class="mb-2">
+        <%= form.label :brand_id, "Marca", class: "form-label" %>
+        <%= form.collection_select :brand_id, 
+                                  @brands, 
+                                  :id, 
+                                  :name, 
+                                  { prompt: "Todas las marcas" }, 
+                                  { 
+                                    class: "form-select",
+                                    data: { action: "change->car-filter#filter" }
+                                  } %>
+      </div>
+
+      <!-- Transmisión -->
+      <div class="mb-2">
+        <%= form.label :transmission, "Transmisión", class: "form-label" %>
+        <%= form.select :transmission, 
+                       transmission_options_for_select((@car_filter&.transmission)),
+                       {}, 
+                       { 
+                         class: "form-select",
+                         data: { action: "change->car-filter#filter" }
+                       } %>
+      </div>
+
+      <!-- Condición -->
+      <div class="mb-2">
+        <%= form.label :condition, "Condición", class: "form-label" %>
+        <%= form.select :condition, 
+                       condition_options_for_select((@car_filter&.condition)),
+                       {}, 
+                       { 
+                         class: "form-select",
+                         data: { action: "change->car-filter#filter" }
+                       } %>
+      </div>
+
+      <!-- Color -->
+      <div class="mb-2">
+        <%= form.label :color, "Color", class: "form-label" %>
+        <%= form.text_field :color, 
+                           class: "form-control", 
+                           placeholder: "Ej: Rojo, Azul",
+                           data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <!-- Rango de años -->
+      <div class="mb-2">
+        <%= form.label :min_year, "Año desde", class: "form-label" %>
+        <%= form.number_field :min_year, 
+                             class: "form-control", 
+                             placeholder: "2010",
+                             min: 1990,
+                             max: Date.current.year + 1,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :max_year, "Año hasta", class: "form-label" %>
+        <%= form.number_field :max_year, 
+                             class: "form-control", 
+                             placeholder: "2024",
+                             min: 1990,
+                             max: Date.current.year + 1,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <!-- Rango de precios -->
+      <div class="mb-2">
+        <%= form.label :min_price, "Precio desde", class: "form-label" %>
+        <%= form.number_field :min_price, 
+                             class: "form-control", 
+                             placeholder: "5000",
+                             step: 1000,
+                             min: 0,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :max_price, "Precio hasta", class: "form-label" %>
+        <%= form.number_field :max_price, 
+                             class: "form-control", 
+                             placeholder: "50000",
+                             step: 1000,
+                             min: 0,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <!-- Rango de kilometraje -->
+      <div class="mb-2">
+        <%= form.label :min_mileage, "Kilometraje desde", class: "form-label" %>
+        <%= form.number_field :min_mileage, 
+                             class: "form-control", 
+                             placeholder: "0",
+                             step: 1000,
+                             min: 0,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :max_mileage, "Kilometraje hasta", class: "form-label" %>
+        <%= form.number_field :max_mileage, 
+                             class: "form-control", 
+                             placeholder: "200000",
+                             step: 1000,
+                             min: 0,
+                             data: { action: "input->car-filter#delayedFilter" } %>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-grid gap-2">
+        <%= form.submit "Filtrar", 
+                       class: "btn btn-primary btn-sm",
+                       data: { car_filter_target: "submitButton" } %>
+        
+        <button type="button" 
+                class="btn btn-outline-secondary btn-sm"
+                data-action="click->car-filter#clearFilters">
+          <i class="fas fa-times"></i> Limpiar
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav">
+  <li class="nav-item">
+    <a class="navbar-brand" style="margin-left: 10px" href="<%= root_path %>">OpenCar</a>
+  </li>
+  <li class="nav-item">
+    <%= link_to "New Car", new_car_path, class: "btn-primary btn", "data-controller": "turbo" %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+</nav>
