@@ -43,21 +43,21 @@
           <div class="row mb-3">
             <div class="col-4">
               <%= form.label :transmission, class: "form-label" %>
-              <%= form.select :transmission, Car.transmissions.keys.map { |t| [t.titleize, t] }, {}, class: "form-select" %>
+              <%= form.select :transmission, CarDecorator.transmission_options_for_form(car.transmission), {}, class: "form-select" %>
             </div>
             <div class="col-4">
               <%= form.label :condition, class: "form-label" %>
-              <%= form.select :condition, Car.conditions.keys.map { |c| [c.titleize, c] }, {}, class: "form-select" %>
+              <%= form.select :condition, CarDecorator.condition_options_for_form(car.condition), {}, class: "form-select" %>
             </div>
             <div class="col-4">
-              <%= form.label :brand_id, "Brand", class: "form-label" %>
-              <%= form.collection_select :brand_id, brands, :id, :name, { prompt: "Select brand" }, class: "form-select" %>
+              <%= form.label :brand_id, class: "form-label" %>
+              <%= form.collection_select :brand_id, brands, :id, :name, { prompt: t("ui.select_brand") }, class: "form-select" %>
             </div>
           </div>
 
           <div data-controller="image-preview">
             <div class="mb-3">
-              <%= form.label :image, "Subir imagen", class: "form-label" %>
+              <%= form.label :image, class: "form-label" %>
               <%= form.file_field :image,
                   class: "form-control",
                   data: {
@@ -86,7 +86,7 @@
                       class="btn btn-outline-secondary btn-sm d-none"
                       data-action="image-preview#cancelPreview"
                       data-image-preview-target="cancelButton">
-                Cancelar imagen nueva
+                <%= t("actions.cancel_image") %>
               </button>
             </div>
           </div>
@@ -94,7 +94,7 @@
 
 
           <div class="mb-3 text-center">
-            <%= form.submit "Save", class: "btn btn-primary btn-sm px-4" %>
+            <%= form.submit t("ui.save"), class: "btn btn-primary btn-sm px-4" %>
           </div>
         <% end %>
       </div>

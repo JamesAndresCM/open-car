@@ -1,14 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light nav">
-  <li class="nav-item">
-    <a class="navbar-brand" style="margin-left: 10px" href="<%= root_path %>">OpenCar</a>
-  </li>
-  <li class="nav-item">
-    <%= link_to "New Car", new_car_path, class: "btn-primary btn", "data-controller": "turbo" %>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">OpenCar</a>
+    
+    <div class="navbar-nav d-flex flex-row gap-3">
+      <%= link_to t("cars.new_car"), new_car_path, class: "btn btn-primary", "data-controller": "turbo" %>
+      
+      <!-- Language Selector -->
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_language_name %>
+        </button>
+        <ul class="dropdown-menu">
+          <% language_options.each do |name, locale| %>
+            <li>
+              <%= link_to name, set_locale_path(locale), 
+                          class: "dropdown-item #{'active' if I18n.locale.to_s == locale}",
+                          method: :get %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
