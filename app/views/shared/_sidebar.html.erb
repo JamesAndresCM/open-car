@@ -1,7 +1,7 @@
 <div class="card mb-3">
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="card-title mb-0">Filtrar autos</h5>
+      <h5 class="card-title mb-0"><%= t("filters.title") %></h5>
       <small class="text-muted" id="results_count">
         <%= render "shared/results_count", count: @total_count || 0 %>
       </small>
@@ -19,10 +19,10 @@
       
       <!-- Búsqueda general -->
       <div class="mb-2">
-        <%= form.label :search, "Modelo o marca", class: "form-label" %>
+        <%= form.label :search, t("filters.search"), class: "form-label" %>
         <%= form.text_field :search, 
                            class: "form-control", 
-                           placeholder: "Ej: Toyota Corolla",
+                           placeholder: t("filters.search"),
                            data: { 
                              car_filter_target: "searchInput",
                              action: "input->car-filter#delayedFilter"
@@ -31,12 +31,12 @@
 
       <!-- Marca -->
       <div class="mb-2">
-        <%= form.label :brand_id, "Marca", class: "form-label" %>
+        <%= form.label :brand_id, t("filters.brand"), class: "form-label" %>
         <%= form.collection_select :brand_id, 
                                   @brands, 
                                   :id, 
                                   :name, 
-                                  { prompt: "Todas las marcas" }, 
+                                  { prompt: t("condition.all") + " las marcas" }, 
                                   { 
                                     class: "form-select",
                                     data: { action: "change->car-filter#filter" }
@@ -45,9 +45,9 @@
 
       <!-- Transmisión -->
       <div class="mb-2">
-        <%= form.label :transmission, "Transmisión", class: "form-label" %>
+        <%= form.label :transmission, t("filters.transmission"), class: "form-label" %>
         <%= form.select :transmission, 
-                       transmission_options_for_select((@car_filter&.transmission)),
+                       CarDecorator.transmission_options_for_select((@car_filter&.transmission)),
                        {}, 
                        { 
                          class: "form-select",
@@ -57,9 +57,9 @@
 
       <!-- Condición -->
       <div class="mb-2">
-        <%= form.label :condition, "Condición", class: "form-label" %>
+        <%= form.label :condition, t("filters.condition"), class: "form-label" %>
         <%= form.select :condition, 
-                       condition_options_for_select((@car_filter&.condition)),
+                       CarDecorator.condition_options_for_select((@car_filter&.condition)),
                        {}, 
                        { 
                          class: "form-select",
@@ -141,14 +141,14 @@
 
       <!-- Botones -->
       <div class="d-grid gap-2">
-        <%= form.submit "Filtrar", 
+        <%= form.submit t("actions.filter"), 
                        class: "btn btn-primary btn-sm",
                        data: { car_filter_target: "submitButton" } %>
         
         <button type="button" 
                 class="btn btn-outline-secondary btn-sm"
                 data-action="click->car-filter#clearFilters">
-          <i class="fas fa-times"></i> Limpiar
+          <i class="fas fa-times"></i> <%= t("actions.clear") %>
         </button>
       </div>
     <% end %>

@@ -29,7 +29,11 @@ module OpenCar
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Autoload additional directories
-    config.autoload_paths += %W[#{config.root}/app/filters]
+    config.autoload_paths += %W[#{config.root}/app/filters #{config.root}/app/decorators]
+
+    # Configuration for internationalization
+    config.i18n.available_locales = [ :en, :es ]
+    config.i18n.default_locale = :es
 
     # Configuration for the application, engines, and railties goes here.
     #
