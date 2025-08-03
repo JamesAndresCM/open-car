@@ -14,11 +14,11 @@
       <h2 class="mb-3"><%= @car.brand_name %> <%= @car.model %></h2>
       <p class="fs-5"><strong>Año:</strong> <%= @car.year %></p>
       <p class="fs-5"><strong>Color:</strong> <%= @car.color %></p>
-      <p class="fs-5"><strong>Transmisión:</strong> <%= @car.transmission.humanize %></p>
-      <p class="fs-5"><strong>Condición:</strong> <%= @car.condition.humanize %></p>
-      <p class="fs-5"><strong>Kilómetros:</strong> <%= number_with_delimiter(@car.mileage) %></p>
-      <p class="fs-5"><strong>Precio:</strong> $<%= number_with_delimiter(@car.price) %></p>
-      <%= link_to 'Volver', cars_path, data: { turbo_frame: "cars" }, class: "btn btn-primary mt-4 btn-lg" %>
+      <p class="fs-5"><strong>Transmisión:</strong> <%= @car.formatted_transmission %></p>
+      <p class="fs-5"><strong>Condición:</strong> <%= @car.formatted_condition %></p>
+      <p class="fs-5"><strong>Kilómetros:</strong> <%= @car.formatted_mileage %></p>
+      <p class="fs-5"><strong>Precio:</strong> <%= @car.formatted_price %></p>
+      <%= link_to t("actions.back"), cars_path, data: { turbo_frame: "cars" }, class: "btn btn-primary mt-4 btn-lg" %>
     </div>
   </div>
 </div>

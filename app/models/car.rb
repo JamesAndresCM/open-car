@@ -17,7 +17,7 @@ class Car < ApplicationRecord
       "cars_channel",
       target: "car_#{id}_price",
       partial: "cars/price",
-      locals: { car: self }
+      locals: { car: CarDecorator.new(self) }
     )
   end
 end
