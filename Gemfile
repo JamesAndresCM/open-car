@@ -59,4 +59,4 @@ group :development do
 end
 
 gem "image_processing", "~> 1.2"
-gem "pagy", "~> 9.3"
+gem "pagy", "~> 9.4"
