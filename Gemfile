@@ -60,3 +60,8 @@ end
 
 gem "image_processing", "~> 1.2"
 gem "pagy", "~> 9.3"
+gem "jwt", "~> 2.9"
+
+group :development, :test do
+  gem "dotenv-rails"
+end
