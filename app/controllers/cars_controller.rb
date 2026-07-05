@@ -4,6 +4,10 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update destroy]
   before_action :load_brands, only: %i[index new edit create update]
   before_action :setup_turbo_stream_service, only: %i[index new edit create update destroy]
+  before_action :authenticate!, only: %i[new create edit update destroy]
+  before_action -> { require_permission!("car#create") }, only: %i[new create]
+  before_action -> { require_permission!("car#update") }, only: %i[edit update]
+  before_action -> { require_permission!("car#destroy") }, only: %i[destroy]
 
   # GET /cars or /cars.json
   def index

@@ -1,10 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light nav">
   <div class="container-fluid">
     <a class="navbar-brand" href="<%= root_path %>">OpenCar</a>
-    
-    <div class="navbar-nav d-flex flex-row gap-3">
-      <%= link_to t("cars.new_car"), new_car_path, class: "btn btn-primary", "data-controller": "turbo" %>
-      
+
+    <div class="navbar-nav d-flex flex-row gap-3 align-items-center">
+      <% if logged_in? %>
+        <span class="text-muted small"><%= current_user_email %></span>
+        <% if can?("car#create") %>
+          <%= link_to t("cars.new_car"), new_car_path, class: "btn btn-primary", "data-controller": "turbo" %>
+        <% end %>
+        <% if admin? %>
+          <%= link_to "Admin Panel", IroniauthClient.hosted_admin_url(callback_url: root_url), class: "btn btn-outline-secondary btn-sm", "data-turbo": "false", target: "_blank" %>
+        <% end %>
+        <%= button_to "Salir", logout_path, method: :delete, class: "btn btn-outline-secondary btn-sm", form: { "data-turbo": "false" } %>
+      <% else %>
+        <%= link_to "Ingresar", login_path, class: "btn btn-outline-primary btn-sm" %>
+        <%= link_to "Registrarse", register_path, class: "btn btn-primary btn-sm" %>
+      <% end %>
+
       <!-- Language Selector -->
       <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -13,7 +25,7 @@
         <ul class="dropdown-menu">
           <% language_options.each do |name, locale| %>
             <li>
-              <%= link_to name, set_locale_path(locale), 
+              <%= link_to name, set_locale_path(locale),
                           class: "dropdown-item #{'active' if I18n.locale.to_s == locale}",
                           method: :get %>
             </li>
