@@ -16,16 +16,338 @@
 #
 # This would use the information in config/locales/es.yml.
 #
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
 #
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
+# true, false, on, off, yes, no
 #
-#     en:
-#       "yes": yup
-#       enabled: "ON"
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
   hello: "Hello world"
+  
+  # ActiveRecord translations from rails-i18n
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: ", and "
+
+    select:
+      prompt: "Please select"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u%n"
+        unit: "$"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ","
+        format: "%n%"
+
+    precision:
+      format:
+        delimiter: ","
+
+    human:
+      format:
+        delimiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+          pb: "PB"
+          eb: "EB"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one: "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one: "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one: "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one: "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one: "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one: "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one: "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one: "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one: "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one: "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one: "almost 1 year"
+        other: "almost %{count} years"
+
+    prompts:
+      year: "Year"
+      month: "Month"
+      day: "Day"
+      hour: "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  helpers:
+    select:
+      prompt: "Please select"
+
+    submit:
+      create: "Create %{model}"
+      submit: "Save %{model}"
+      update: "Update %{model}"
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages:
+      accepted: "must be accepted"
+      blank: "can't be blank"
+      present: "must be blank"
+      confirmation: "doesn't match %{attribute}"
+      empty: "can't be empty"
+      equal_to: "must be equal to %{count}"
+      even: "must be even"
+      exclusion: "is reserved"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      inclusion: "is not included in the list"
+      invalid: "is invalid"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      odd: "must be odd"
+      required: "must exist"
+      taken: "has already been taken"
+      too_long:
+        one: "is too long (maximum is 1 character)"
+        other: "is too long (maximum is %{count} characters)"
+      too_short:
+        one: "is too short (minimum is 1 character)"
+        other: "is too short (minimum is %{count} characters)"
+      wrong_length:
+        one: "is the wrong length (should be 1 character)"
+        other: "is the wrong length (should be %{count} characters)"
+      other_than: "must be other than %{count}"
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+
+    models:
+      car: "Car"
+      brand: "Brand"
+
+    attributes:
+      car:
+        model: "Model"
+        year: "Year"
+        transmission: "Transmission"
+        condition: "Condition"
+        mileage: "Mileage"
+        color: "Color"
+        price: "Price"
+        brand: "Brand"
+        brand_id: "Brand"
+        image: "Image"
+        created_at: "Created at"
+        updated_at: "Updated at"
+
+      brand:
+        name: "Name"
+        created_at: "Created at"
+        updated_at: "Updated at"
+
+  # Car related translations
+  cars:
+    title: "All Cars"
+    new_car: "New Car"
+    edit_car: "Edit Car"
+    show_car: "Car Details"
+    delete_car: "Delete Car"
+    created_successfully: "Car created successfully!"
+    updated_successfully: "Car updated successfully!"
+    deleted_successfully: "Car deleted successfully."
+    creation_error: "Error creating car. Please check the fields."
+    update_error: "Error updating car. Please check the fields."
+    
+  # Car attributes
+  car:
+    model: "Model"
+    year: "Year"
+    transmission: "Transmission"
+    condition: "Condition"
+    mileage: "Mileage"
+    color: "Color"
+    price: "Price"
+    brand: "Brand"
+    image: "Upload Image"
+    
+  # Transmission options
+  transmission:
+    all: "All"
+    manual: "Manual"
+    automatic: "Automatic"
+    
+  # Condition options
+  condition:
+    all: "All"
+    brand_new: "New"
+    used: "Used"
+    certified: "Certified"
+    
+  # Filters
+  filters:
+    title: "Filter cars"
+    search: "Search by model..."
+    brand: "Brand"
+    transmission: "Transmission"
+    condition: "Condition"
+    color: "Color"
+    year_range: "Year Range"
+    price_range: "Price Range"
+    mileage_range: "Mileage Range"
+    min_year: "Min Year"
+    max_year: "Max Year"
+    min_price: "Min Price"
+    max_price: "Max Price"
+    min_mileage: "Min Mileage"
+    max_mileage: "Max Mileage"
+    
+  # UI Elements
+  ui:
+    save: "Save"
+    cancel: "Cancel"
+    close: "Close"
+    select_brand: "Select brand"
+    results_count: 
+      zero: "No cars found"
+      one: "%{count} car found"
+      other: "%{count} cars found"
+    
+  # Actions
+  actions:
+    view: "View"
+    show: "Show"
+    edit: "Edit"
+    delete: "Delete"
+    confirm_delete: "Are you sure you want to delete this car?"
+    back: "Back"
+    filter: "Filter"
+    clear: "Clear"
+    cancel_image: "Cancel new image"
