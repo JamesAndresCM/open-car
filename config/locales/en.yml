@@ -340,6 +340,15 @@ en:
       one: "%{count} car found"
       other: "%{count} cars found"
     
+  auth:
+    login_required: "You must log in to continue."
+    login_success: "Welcome!"
+    login_failed: "Invalid email or password."
+    logout_success: "Logged out successfully."
+    permission_denied: "You don't have permission to perform this action."
+    register_success: "Account created! Welcome."
+    register_failed: "Failed to create account. Please try again."
+
   # Actions
   actions:
     view: "View"

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get    "login",         to: "sessions#new",              as: :login
+  get    "register",      to: "sessions#new_registration", as: :register
+  get    "auth/callback", to: "sessions#callback",         as: :auth_callback
+  delete "logout",        to: "sessions#destroy",          as: :logout
+
   resources :cars
 
   # Locale routes

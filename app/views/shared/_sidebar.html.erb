@@ -32,10 +32,10 @@
       <!-- Marca -->
       <div class="mb-2">
         <%= form.label :brand_id, t("filters.brand"), class: "form-label" %>
-        <%= form.collection_select :brand_id, 
-                                  @brands, 
-                                  :id, 
-                                  :name, 
+        <%= form.collection_select :brand_id,
+                                  @brands || [],
+                                  :id,
+                                  :name,
                                   { prompt: t("condition.all") + " las marcas" }, 
                                   { 
                                     class: "form-select",

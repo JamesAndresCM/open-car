@@ -307,6 +307,15 @@ es:
       one: "%{count} auto encontrado"
       other: "%{count} autos encontrados"
     
+  auth:
+    login_required: "Debes iniciar sesión para continuar."
+    login_success: "¡Bienvenido!"
+    login_failed: "Email o contraseña incorrectos."
+    logout_success: "Sesión cerrada correctamente."
+    permission_denied: "No tienes permisos para realizar esta acción."
+    register_success: "¡Cuenta creada! Bienvenido."
+    register_failed: "Error al crear la cuenta. Intenta de nuevo."
+
   # Acciones
   actions:
     view: "Ver"
